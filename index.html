@@ -3,444 +3,891 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>ADMIN MEGH 71 X | FF Bazar BD</title>
+
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:#080b14;color:#fff;font-family:Arial,sans-serif}
-header{position:sticky;top:0;z-index:20;background:#0b1020f5;border-bottom:1px solid #26344f;padding:14px 5%;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.logo{font-size:22px;font-weight:900}.logo span{color:#fbbf24}
-nav{display:flex;gap:7px;flex-wrap:wrap}
-button,.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block}
-button:disabled{opacity:.6;cursor:not-allowed}.navbtn{background:#202b40;color:#fff}.sell{background:#fbbf24;color:#111}.buy{background:#22c55e;color:#062b12}.danger{background:#ef4444;color:#fff}.edit{background:#3b82f6;color:#fff}
-.hero{padding:55px 5%;background:radial-gradient(circle at 80% 20%,#4c1d95,transparent 35%),linear-gradient(135deg,#111827,#0f172a)}
-.hero h1{font-size:38px;margin:0 0 12px}.hero p{max-width:700px;color:#cbd5e1;font-size:17px;line-height:1.6}.hero .btn{margin:6px 5px 0 0}
-.profile{width:90%;max-width:500px;margin:30px auto 0;padding:25px;background:#111827;border:2px solid #fbbf24;border-radius:20px;text-align:center}
-.profile img{width:170px;height:170px;object-fit:cover;border-radius:50%;border:3px solid #fbbf24;background:#202938}.profile h2{color:#fbbf24}.online{color:#00ff88;font-weight:bold}.profile p{color:#cbd5e1}
-.profile .button{display:block;width:90%;max-width:300px;margin:10px auto;padding:13px;border-radius:25px;text-decoration:none;color:#fff;font-weight:bold;background:linear-gradient(90deg,#ff00d4,#8f00ff)}
-.wrap{width:90%;max-width:1150px;margin:28px auto}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:25px 0}.stat{background:#111827;padding:18px;border-radius:12px;text-align:center}.stat b{font-size:23px;color:#fbbf24}
-.adminbar{display:none;background:#111827;border:1px solid #334155;border-radius:12px;padding:12px;margin:15px 0}.adminbar span{color:#22c55e;font-weight:bold}
-.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #334155;background:#0f172a;color:#fff;border-radius:8px;outline:none}
-input:focus,select:focus,textarea:focus{border-color:#fbbf24}.search{flex:2;min-width:220px}.filter{flex:1;min-width:150px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px}
-.card{background:#111827;border:1px solid #26344f;border-radius:14px;overflow:hidden;box-shadow:0 8px 25px #0004}.card img{width:100%;height:180px;object-fit:cover;display:block;background:#202938}
-.no-photo{height:180px;display:flex;align-items:center;justify-content:center;background:#202938;color:#94a3b8}.body{padding:15px}.tag{font-size:12px;color:#94a3b8}.body h3{margin:8px 0}.price{font-size:22px;font-weight:900;color:#fbbf24;margin:7px 0}.body p{color:#cbd5e1;min-height:40px;line-height:1.5;white-space:pre-wrap}
-.actions{display:flex;gap:7px;flex-wrap:wrap}.actions .btn{flex:1;text-align:center;min-width:90px}
-.modal{display:none;position:fixed;inset:0;background:#000c;z-index:100;align-items:center;justify-content:center;padding:15px}
-.box{width:100%;max-width:540px;max-height:92vh;overflow:auto;background:#111827;border:1px solid #334155;border-radius:15px;padding:22px}
-.close{float:right;background:#273247;color:#fff;border-radius:50%;width:34px;height:34px;padding:0;font-size:20px}.group{margin:14px 0}.group label{display:block;margin-bottom:7px;font-weight:bold}
-.photo-box{border:2px dashed #475569;border-radius:12px;padding:15px;text-align:center;background:#0f172a}.photo-box input[type=file]{border:0;background:#172033;padding:12px;cursor:pointer}
-.preview{display:none;width:100%;max-height:260px;object-fit:cover;border-radius:10px;margin-top:12px;border:2px solid #fbbf24}
-.upload-status{display:none;margin-top:10px;padding:10px;border-radius:8px;background:#172033;color:#fbbf24}
-.notice{padding:12px;border-radius:9px;background:#1b2538;color:#cbd5e1;font-size:13px;line-height:1.5}
-footer{border-top:1px solid #202b40;text-align:center;color:#94a3b8;padding:30px;margin-top:45px}.hidden{display:none!important}
-@media(max-width:600px){.hero h1{font-size:30px}.stats{grid-template-columns:1fr}.logo{font-size:18px}header{padding:12px 3%}nav button{padding:9px 10px;font-size:12px}.grid{grid-template-columns:1fr}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+ margin:0;
+ background:#080b14;
+ color:#fff;
+ font-family:Arial,sans-serif;
+}
+
+header{
+ position:sticky;
+ top:0;
+ z-index:20;
+ background:#0b1020f5;
+ border-bottom:1px solid #26344f;
+ padding:14px 5%;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+}
+
+.logo{
+ font-size:22px;
+ font-weight:900;
+}
+
+.logo span{
+ color:#fbbf24;
+}
+
+nav{
+ display:flex;
+ gap:7px;
+ flex-wrap:wrap;
+}
+
+button,.btn{
+ border:0;
+ border-radius:9px;
+ padding:11px 15px;
+ font-weight:bold;
+ cursor:pointer;
+ text-decoration:none;
+ display:inline-block;
+}
+
+button:disabled{
+ opacity:.6;
+ cursor:not-allowed;
+}
+
+.navbtn{
+ background:#202b40;
+ color:#fff;
+}
+
+.sell{
+ background:#fbbf24;
+ color:#111;
+}
+
+.buy{
+ background:#22c55e;
+ color:#062b12;
+}
+
+.danger{
+ background:#ef4444;
+ color:#fff;
+}
+
+.edit{
+ background:#3b82f6;
+ color:#fff;
+}
+
+.hero{
+ padding:55px 5%;
+ background:
+ radial-gradient(circle at 80% 20%,#4c1d95,transparent 35%),
+ linear-gradient(135deg,#111827,#0f172a);
+}
+
+.hero h1{
+ font-size:38px;
+ margin:0 0 12px;
+}
+
+.hero p{
+ max-width:700px;
+ color:#cbd5e1;
+ font-size:17px;
+ line-height:1.6;
+}
+
+.hero .btn{
+ margin:6px 5px 0 0;
+}
+
+.profile{
+ width:90%;
+ max-width:500px;
+ margin:30px auto 0;
+ padding:25px;
+ background:#111827;
+ border:2px solid #fbbf24;
+ border-radius:20px;
+ text-align:center;
+}
+
+.profile img{
+ width:170px;
+ height:170px;
+ object-fit:cover;
+ border-radius:50%;
+ border:3px solid #fbbf24;
+ background:#202938;
+}
+
+.profile h2{
+ color:#fbbf24;
+}
+
+.online{
+ color:#00ff88;
+ font-weight:bold;
+}
+
+.profile p{
+ color:#cbd5e1;
+}
+
+.profile .button{
+ display:block;
+ width:90%;
+ max-width:300px;
+ margin:10px auto;
+ padding:13px;
+ border-radius:25px;
+ text-decoration:none;
+ color:#fff;
+ font-weight:bold;
+ background:linear-gradient(90deg,#ff00d4,#8f00ff);
+}
+
+.wrap{
+ width:90%;
+ max-width:1150px;
+ margin:28px auto;
+}
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:10px;
+ margin:25px 0;
+}
+
+.stat{
+ background:#111827;
+ padding:18px;
+ border-radius:12px;
+ text-align:center;
+}
+
+.stat b{
+ font-size:23px;
+ color:#fbbf24;
+}
+
+.adminbar{
+ display:none;
+ background:#111827;
+ border:1px solid #334155;
+ border-radius:12px;
+ padding:12px;
+ margin:15px 0;
+}
+
+.adminbar span{
+ color:#22c55e;
+ font-weight:bold;
+}
+
+.tools{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-bottom:22px;
+}
+
+input,select,textarea{
+ width:100%;
+ padding:12px;
+ border:1px solid #334155;
+ background:#0f172a;
+ color:#fff;
+ border-radius:8px;
+ outline:none;
+}
+
+input:focus,select:focus,textarea:focus{
+ border-color:#fbbf24;
+}
+
+.search{
+ flex:2;
+ min-width:220px;
+}
+
+.filter{
+ flex:1;
+ min-width:150px;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(235px,1fr));
+ gap:18px;
+}
+
+.card{
+ background:#111827;
+ border:1px solid #26344f;
+ border-radius:14px;
+ overflow:hidden;
+ box-shadow:0 8px 25px #0004;
+}
+
+.card img{
+ width:100%;
+ height:180px;
+ object-fit:cover;
+ display:block;
+ background:#202938;
+}
+
+.no-photo{
+ height:180px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:#202938;
+ color:#94a3b8;
+}
+
+.body{
+ padding:15px;
+}
+
+.tag{
+ font-size:12px;
+ color:#94a3b8;
+}
+
+.body h3{
+ margin:8px 0;
+}
+
+.price{
+ font-size:22px;
+ font-weight:900;
+ color:#fbbf24;
+ margin:7px 0;
+}
+
+.body p{
+ color:#cbd5e1;
+ min-height:40px;
+ line-height:1.5;
+ white-space:pre-wrap;
+}
+
+.actions{
+ display:flex;
+ gap:7px;
+ flex-wrap:wrap;
+}
+
+.actions .btn{
+ flex:1;
+ text-align:center;
+ min-width:90px;
+}
+
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#000c;
+ z-index:100;
+ align-items:center;
+ justify-content:center;
+ padding:15px;
+}
+
+.box{
+ width:100%;
+ max-width:540px;
+ max-height:92vh;
+ overflow:auto;
+ background:#111827;
+ border:1px solid #334155;
+ border-radius:15px;
+ padding:22px;
+}
+
+.close{
+ float:right;
+ background:#273247;
+ color:#fff;
+ border-radius:50%;
+ width:34px;
+ height:34px;
+ padding:0;
+ font-size:20px;
+}
+
+.group{
+ margin:14px 0;
+}
+
+.group label{
+ display:block;
+ margin-bottom:7px;
+ font-weight:bold;
+}
+
+.photo-box{
+ border:2px dashed #475569;
+ border-radius:12px;
+ padding:15px;
+ text-align:center;
+ background:#0f172a;
+}
+
+.photo-box input[type=file]{
+ border:0;
+ background:#172033;
+ padding:12px;
+ cursor:pointer;
+}
+
+.preview{
+ display:none;
+ width:100%;
+ max-height:260px;
+ object-fit:cover;
+ border-radius:10px;
+ margin-top:12px;
+ border:2px solid #fbbf24;
+}
+
+.upload-status{
+ display:none;
+ margin-top:10px;
+ padding:10px;
+ border-radius:8px;
+ background:#172033;
+ color:#fbbf24;
+}
+
+.notice{
+ padding:12px;
+ border-radius:9px;
+ background:#1b2538;
+ color:#cbd5e1;
+ font-size:13px;
+ line-height:1.5;
+}
+
+footer{
+ border-top:1px solid #202b40;
+ text-align:center;
+ color:#94a3b8;
+ padding:30px;
+ margin-top:45px;
+}
+
+.hidden{
+ display:none!important;
+}
+
+@media(max-width:600px){
+
+ .hero h1{
+  font-size:30px;
+ }
+
+ .stats{
+  grid-template-columns:1fr;
+ }
+
+ .logo{
+  font-size:18px;
+ }
+
+ header{
+  padding:12px 3%;
+ }
+
+ nav button{
+  padding:9px 10px;
+  font-size:12px;
+ }
+
+ .grid{
+  grid-template-columns:1fr;
+ }
+}
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">ADMIN <span>MEGH 71 X</span></div>
+
+<div class="logo">
+ADMIN <span>MEGH 71 X</span>
+</div>
+
 <nav>
+
 <button class="navbtn" onclick="goHome()">Megh</button>
+
 <button class="navbtn" onclick="goBuy()">Buy</button>
+
+<!-- সবাই Sell করতে পারবে -->
 <button class="sell" onclick="openSell()">＋ Sell</button>
+
+<!-- শুধু Admin -->
 <button class="navbtn" id="loginBtn" onclick="openLogin()">🔐 Admin</button>
-<button class="navbtn hidden" id="logoutBtn" onclick="logout()">Logout</button>
+
+<button class="navbtn hidden" id="logoutBtn" onclick="logout()">
+Logout
+</button>
+
 </nav>
+
 </header>
 
+
 <section class="hero">
+
 <h1>🎮 Free Fire Account Buy &amp; Sell</h1>
-<p>বাংলাদেশের জন্য তৈরি marketplace। Account listing দেখুন, দাম তুলনা করুন এবং seller-এর সাথে সরাসরি যোগাযোগ করুন।</p>
-<a class="btn buy" href="#buy">Buy Account</a>
-<button class="btn sell" onclick="openSell()">Sell Account</button>
+
+<p>
+বাংলাদেশের জন্য তৈরি marketplace।
+Account listing দেখুন, দাম তুলনা করুন এবং seller-এর সাথে সরাসরি যোগাযোগ করুন।
+</p>
+
+<a class="btn buy" href="#buy">
+Buy Account
+</a>
+
+<!-- Password লাগবে না -->
+<button class="btn sell" onclick="openSell()">
+Sell Account
+</button>
+
 
 <div class="profile">
+
 <img src="logo.png" alt="ADMIN MEGH 71 X">
+
 <h2>ADMIN MEGH 71 X</h2>
+
 <p class="online">● ONLINE</p>
-<p>🎮 Gaming Account Buy &amp; Sell<br>Trusted Service • Fast Response</p>
-<a class="button" href="https://www.facebook.com/share/1CTuf3Tioz/" target="_blank" rel="noopener noreferrer">🔵 FACEBOOK</a>
-<a class="button" href="https://m.me/j/Aba2eiIkaNWFg4LC/" target="_blank" rel="noopener noreferrer">💬 MESSENGER GROUP</a>
-<a class="button" href="https://wa.me/97451601934" target="_blank" rel="noopener noreferrer">🟢 WHATSAPP CHAT</a>
+
+<p>
+🎮 Gaming Account Buy &amp; Sell<br>
+Trusted Service • Fast Response
+</p>
+
+<a class="button"
+href="https://www.facebook.com/share/1CTuf3Tioz/"
+target="_blank">
+🔵 FACEBOOK
+</a>
+
+<a class="button"
+href="https://m.me/j/Aba2eiIkaNWFg4LC/"
+target="_blank">
+💬 MESSENGER GROUP
+</a>
+
+<a class="button"
+href="https://wa.me/97451601934"
+target="_blank">
+🟢 WHATSAPP CHAT
+</a>
+
 </div>
+
 </section>
+
 
 <main class="wrap">
+
 <div class="stats">
-<div class="stat"><b id="count">0</b><br>Listings</div>
-<div class="stat"><b>৳</b><br>BDT Currency</div>
-<div class="stat"><b>24/7</b><br>Marketplace</div>
+
+<div class="stat">
+<b id="count">0</b>
+<br>
+Listings
 </div>
 
-<div class="adminbar" id="adminBar">🔐 Admin Mode: <span>ACTIVE</span> — Listing publish/edit/delete করা যাবে।</div>
+<div class="stat">
+<b>৳</b>
+<br>
+BDT Currency
+</div>
+
+<div class="stat">
+<b>24/7</b>
+<br>
+Marketplace
+</div>
+
+</div>
+
+
+<div class="adminbar" id="adminBar">
+
+🔐 Admin Mode:
+<span>ACTIVE</span>
+
+— Listing edit/delete করা যাবে।
+
+</div>
+
 
 <section id="buy">
+
 <h2>🔥 Latest Accounts</h2>
+
+
 <div class="tools">
-<input id="search" class="search" type="search" maxlength="80" placeholder="Search: level, skin, bundle..." oninput="render()">
-<select id="cat" class="filter" onchange="render()">
-<option value="">সব Category</option><option value="Rare Skin">Rare Skin</option><option value="High Level">High Level</option><option value="Old Account">Old Account</option><option value="Other">Other</option>
+
+<input
+id="search"
+class="search"
+type="search"
+maxlength="80"
+placeholder="Search: level, skin, bundle..."
+oninput="render()"
+>
+
+
+<select
+id="cat"
+class="filter"
+onchange="render()"
+>
+
+<option value="">সব Category</option>
+
+<option value="Rare Skin">
+Rare Skin
+</option>
+
+<option value="High Level">
+High Level
+</option>
+
+<option value="Old Account">
+Old Account
+</option>
+
+<option value="Other">
+Other
+</option>
+
 </select>
-<select id="sort" class="filter" onchange="render()">
-<option value="">Sort</option><option value="low">Price Low → High</option><option value="high">Price High → Low</option>
+
+
+<select
+id="sort"
+class="filter"
+onchange="render()"
+>
+
+<option value="">Sort</option>
+
+<option value="low">
+Price Low → High
+</option>
+
+<option value="high">
+Price High → Low
+</option>
+
 </select>
-<button class="btn sell" onclick="openSell()">＋ Post Ad</button>
+
+
+<!-- সবাই Post করতে পারবে -->
+<button class="btn sell" onclick="openSell()">
+＋ Post Ad
+</button>
+
 </div>
+
+
 <div id="grid" class="grid"></div>
+
 </section>
+
 </main>
 
+
+<!-- ADMIN LOGIN -->
+
 <div id="loginModal" class="modal">
+
 <div class="box">
-<button class="close" onclick="closeLogin()">×</button>
+
+<button class="close" onclick="closeLogin()">
+×
+</button>
+
 <h2>🔐 Admin Login</h2>
-<div class="notice">শুধু website owner/admin-এর জন্য। Password কাউকে দেবেন না।</div>
-<div class="group"><label>Admin Password</label><input id="adminPassword" type="password" autocomplete="current-password" maxlength="100" placeholder="Enter password"></div>
-<button class="btn sell" style="width:100%" onclick="login()">Login</button>
-</div>
-</div>
 
-<div id="sellModal" class="modal">
-<div class="box">
-<button class="close" onclick="closeSell()">×</button>
-<h2 id="sellTitle">📱 Add Account</h2>
-<div class="notice">⚠️ Password, OTP, recovery code বা login credential এখানে লিখবেন না।</div>
-
-<div class="group"><label>Account Title</label><input id="title" type="text" maxlength="100" placeholder="Level 75 Rare Skin Account"></div>
-<div class="group"><label>Price (৳)</label><input id="price" type="number" min="1" max="10000000" step="1" placeholder="5000"></div>
-<div class="group"><label>Category</label>
-<select id="kind"><option value="Rare Skin">Rare Skin</option><option value="High Level">High Level</option><option value="Old Account">Old Account</option><option value="Other">Other</option></select></div>
+<div class="notice">
+শুধু website owner/admin-এর জন্য।
+</div>
 
 <div class="group">
-<label>📷 Account Photo</label>
+
+<label>
+Admin Password
+</label>
+
+<input
+id="adminPassword"
+type="password"
+autocomplete="current-password"
+maxlength="100"
+placeholder="Enter password"
+>
+
+</div>
+
+<button
+class="btn sell"
+style="width:100%"
+onclick="login()"
+>
+Login
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SELL FORM -->
+
+<div id="sellModal" class="modal">
+
+<div class="box">
+
+<button class="close" onclick="closeSell()">
+×
+</button>
+
+<h2 id="sellTitle">
+📱 Add Account
+</h2>
+
+<div class="notice">
+
+✅ Sell Post করার জন্য Admin Password লাগবে না।
+
+<br><br>
+
+⚠️ Password, OTP, recovery code বা login credential এখানে লিখবেন না।
+
+</div>
+
+
+<div class="group">
+
+<label>
+Account Title
+</label>
+
+<input
+id="title"
+type="text"
+maxlength="100"
+placeholder="Level 75 Rare Skin Account"
+>
+
+</div>
+
+
+<div class="group">
+
+<label>
+Price (৳)
+</label>
+
+<input
+id="price"
+type="number"
+min="1"
+max="10000000"
+step="1"
+placeholder="5000"
+>
+
+</div>
+
+
+<div class="group">
+
+<label>
+Category
+</label>
+
+<select id="kind">
+
+<option value="Rare Skin">
+Rare Skin
+</option>
+
+<option value="High Level">
+High Level
+</option>
+
+<option value="Old Account">
+Old Account
+</option>
+
+<option value="Other">
+Other
+</option>
+
+</select>
+
+</div>
+
+
+<div class="group">
+
+<label>
+📷 Account Photo
+</label>
+
 <div class="photo-box">
-<input id="photo" type="file" accept="image/jpeg,image/png,image/webp" onchange="showPreview(this)">
-<img id="preview" class="preview" alt="Selected Photo">
-</div>
-<small style="color:#94a3b8">JPG / PNG / WEBP — Maximum 2MB</small>
-<div id="uploadStatus" class="upload-status"></div>
+
+<input
+id="photo"
+type="file"
+accept="image/jpeg,image/png,image/webp"
+onchange="showPreview(this)"
+>
+
+<img
+id="preview"
+class="preview"
+alt="Selected Photo"
+>
+
 </div>
 
-<div class="group"><label>Account Details</label><textarea id="details" rows="4" maxlength="1000" placeholder="Level, skins, bundles, server etc."></textarea></div>
-<div class="group"><label>WhatsApp Number</label><input id="wa" type="tel" inputmode="tel" maxlength="20" placeholder="+8801700000000"></div>
-<button id="publishBtn" class="btn sell" style="width:100%" onclick="publish()">🚀 Publish Listing</button>
-</div>
+<small style="color:#94a3b8">
+JPG / PNG / WEBP — Maximum 2MB
+</small>
+
+<div
+id="uploadStatus"
+class="upload-status">
 </div>
 
-<footer>© 2026 ADMIN MEGH 71 X<br>FF Bazar BD — Marketplace</footer>
+</div>
+
+
+<div class="group">
+
+<label>
+Account Details
+</label>
+
+<textarea
+id="details"
+rows="4"
+maxlength="1000"
+placeholder="Level, skins, bundles, server etc."
+></textarea>
+
+</div>
+
+
+<div class="group">
+
+<label>
+WhatsApp Number
+</label>
+
+<input
+id="wa"
+type="tel"
+inputmode="tel"
+maxlength="20"
+placeholder="+8801700000000"
+>
+
+</div>
+
+
+<button
+id="publishBtn"
+class="btn sell"
+style="width:100%"
+onclick="publish()"
+>
+
+🚀 Publish Listing
+
+</button>
+
+</div>
+
+</div>
+
+
+<footer>
+
+© 2026 ADMIN MEGH 71 X
+<br>
+FF Bazar BD — Marketplace
+
+</footer>
+
 
 <script>
+
 "use strict";
 
-/* ================= CLOUDINARY =================
-   তোমার screenshot অনুযায়ী:
-   Cloud name = yvjvg47t
-   Unsigned upload preset = admin_megh_71x
-*/
-const CLOUDINARY_CLOUD_NAME = "yvjvg47t";
-const CLOUDINARY_UPLOAD_PRESET = "admin_megh_71x";
-const CLOUDINARY_UPLOAD_URL =
-    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 
-/* ADMIN PASSWORD */
+/* ================= CLOUDINARY ================= */
+
+const CLOUDINARY_CLOUD_NAME = "yvjvg47t";
+
+const CLOUDINARY_UPLOAD_PRESET = "admin_megh_71x";
+
+const CLOUDINARY_UPLOAD_URL =
+`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+
+
+/* ================= ADMIN PASSWORD ================= */
+
 const ADMIN_PASSWORD = "MEGH71@Secure2026";
 
-const MAX_IMAGE_SIZE = 2 * 1024 * 1024;
-const ALLOWED_TYPES = ["image/jpeg","image/png","image/webp"];
 
-const starter = [
-{ id:"starter-1", title:"Level 75 Rare Skin Account", price:5000, kind:"Rare Skin", pic:"https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80", details:"Rare skins, bundles and high level.", wa:"8801700000000" },
-{ id:"starter-2", title:"High Level FF Account", price:9500, kind:"High Level", pic:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80", details:"High level account with multiple items.", wa:"8801700000000" },
-{ id:"starter-3", title:"Old Account — Rare Items", price:7000, kind:"Old Account", pic:"https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=900&q=80", details:"Old account with collectible items.", wa:"8801700000000" }
+const MAX_IMAGE_SIZE = 2 * 1024 * 1024;
+
+const ALLOWED_TYPES = [
+"image/jpeg",
+"image/png",
+"image/webp"
 ];
 
-let items = loadItems();
-let editId = null;
 
-function isAdmin(){ return sessionStorage.getItem("ff_admin")==="1"; }
+const starter = [
 
-function updateAdminUI(){
- document.getElementById("adminBar").style.display=isAdmin()?"block":"none";
- document.getElementById("loginBtn").classList.toggle("hidden",isAdmin());
- document.getElementById("logoutBtn").classList.toggle("hidden",!isAdmin());
-}
+{
+id:"starter-1",
+title:"Level 75 Rare Skin Account",
+price:5000,
+kind:"Rare Skin",
+pic:"https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80",
+details:"Rare skins, bundles and high level.",
+wa:"8801700000000"
+},
 
-function loadItems(){
- try{
-  const raw=localStorage.getItem("ffbazar_items");
-  if(!raw)return starter.slice();
-  const parsed=JSON.parse(raw);
-  if(Array.isArray(parsed))return parsed.slice(0,50);
- }catch(e){console.error(e)}
- return starter.slice();
-}
-
-function saveItems(){
- try{
-  localStorage.setItem("ffbazar_items",JSON.stringify(items.slice(0,50)));
-  return true;
- }catch(e){
-  alert("❌ Storage পূর্ণ। Listing data ছোট করুন।");
-  return false;
- }
-}
-
-function esc(value){
- return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
-}
-
-function cleanNumber(value){
- const n=String(value||"").replace(/\D/g,"");
- return n.length>=10&&n.length<=15?n:null;
-}
-
-function safeImageUrl(value){
- const s=String(value||"");
- if(s.startsWith("data:image/"))return s;
- try{
-  const u=new URL(s,location.href);
-  if(u.protocol==="https:"||(u.protocol==="http:"&&location.protocol==="http:"))return u.href;
- }catch(e){}
- return "";
-}
-
-function render(){
- const search=document.getElementById("search").value.trim().toLowerCase();
- const category=document.getElementById("cat").value;
- const sort=document.getElementById("sort").value;
-
- let list=items.filter(item=>{
-  const text=`${item.title||""} ${item.details||""} ${item.kind||""}`.toLowerCase();
-  return text.includes(search)&&(!category||item.kind===category);
- });
-
- if(sort==="low")list.sort((a,b)=>Number(a.price||0)-Number(b.price||0));
- if(sort==="high")list.sort((a,b)=>Number(b.price||0)-Number(a.price||0));
-
- document.getElementById("count").textContent=items.length;
- const grid=document.getElementById("grid");
-
- if(!list.length){grid.innerHTML="<p>কোনো account পাওয়া যায়নি।</p>";return;}
-
- grid.innerHTML=list.map(item=>{
-  const number=cleanNumber(item.wa);
-  const img=safeImageUrl(item.pic);
-  const whatsapp=number?`https://wa.me/${number}`:"#";
-  return `
-  <article class="card">
-   ${img?`<img src="${esc(img)}" alt="Account Photo" onerror="this.style.display='none'">`:`<div class="no-photo">No Photo</div>`}
-   <div class="body">
-    <div class="tag">${esc(item.kind)}</div>
-    <h3>${esc(item.title)}</h3>
-    <div class="price">৳ ${Number(item.price||0).toLocaleString("bn-BD")}</div>
-    <p>${esc(item.details)}</p>
-    <div class="actions">
-     ${number?`<a class="btn buy" href="${esc(whatsapp)}" target="_blank" rel="noopener noreferrer">🟢 WhatsApp</a>`:""}
-     ${isAdmin()?`
-      <button class="btn edit" onclick="editItem('${esc(item.id)}')">✏️ Edit</button>
-      <button class="btn danger" onclick="deleteItem('${esc(item.id)}')">🗑️ Delete</button>`:""}
-    </div>
-   </div>
-  </article>`;
- }).join("");
-}
-
-function openLogin(){
- document.getElementById("loginModal").style.display="flex";
- setTimeout(()=>document.getElementById("adminPassword").focus(),100);
-}
-function closeLogin(){
- document.getElementById("loginModal").style.display="none";
- document.getElementById("adminPassword").value="";
-}
-function login(){
- const password=document.getElementById("adminPassword").value;
- if(password!==ADMIN_PASSWORD){alert("❌ ভুল Admin Password!");return;}
- sessionStorage.setItem("ff_admin","1");
- closeLogin();updateAdminUI();render();
- alert("✅ Admin Login সফল হয়েছে!");
-}
-function logout(){
- sessionStorage.removeItem("ff_admin");editId=null;updateAdminUI();render();
- alert("Admin Logout হয়েছে।");
-}
-function requireAdmin(){
- if(!isAdmin()){alert("🔒 আগে Admin Login করুন।");openLogin();return false;}
- return true;
-}
-
-function openSell(){
- if(!requireAdmin())return;
- editId=null;resetForm();
- document.getElementById("sellTitle").textContent="📱 Add Account";
- document.getElementById("publishBtn").textContent="🚀 Publish Listing";
- document.getElementById("sellModal").style.display="flex";
-}
-function closeSell(){
- document.getElementById("sellModal").style.display="none";
- resetForm();
-}
-function resetForm(){
- document.getElementById("title").value="";
- document.getElementById("price").value="";
- document.getElementById("details").value="";
- document.getElementById("wa").value="";
- document.getElementById("photo").value="";
- document.getElementById("preview").removeAttribute("src");
- document.getElementById("preview").style.display="none";
- document.getElementById("uploadStatus").style.display="none";
- document.getElementById("uploadStatus").textContent="";
-}
-
-function validateImage(file){
- if(!file)return false;
- if(!ALLOWED_TYPES.includes(file.type)){alert("❌ শুধু JPG, PNG অথবা WEBP image ব্যবহার করুন।");return false;}
- if(file.size>MAX_IMAGE_SIZE){alert("❌ Image সর্বোচ্চ 2MB হতে পারবে।");return false;}
- return true;
-}
-
-function showPreview(input){
- const preview=document.getElementById("preview");
- const file=input.files[0];
- if(!file){preview.style.display="none";preview.removeAttribute("src");return;}
- if(!validateImage(file)){input.value="";preview.style.display="none";preview.removeAttribute("src");return;}
- const reader=new FileReader();
- reader.onload=e=>{preview.src=e.target.result;preview.style.display="block";};
- reader.readAsDataURL(file);
-}
-
-/* CLOUDINARY UPLOAD */
-async function uploadToCloudinary(file){
- const formData=new FormData();
- formData.append("file",file);
- formData.append("upload_preset",CLOUDINARY_UPLOAD_PRESET);
-
- const response=await fetch(CLOUDINARY_UPLOAD_URL,{
-  method:"POST",
-  body:formData
- });
-
- if(!response.ok){
-  let message="Cloudinary upload failed";
-  try{
-   const err=await response.json();
-   message=err?.error?.message||message;
-  }catch(e){}
-  throw new Error(message);
- }
-
- const data=await response.json();
- if(!data.secure_url)throw new Error("Image URL পাওয়া যায়নি।");
- return data.secure_url;
-}
-
-async function publish(){
- if(!requireAdmin())return;
-
- const title=document.getElementById("title").value.trim();
- const price=Number(document.getElementById("price").value);
- const kind=document.getElementById("kind").value;
- const details=document.getElementById("details").value.trim();
- const wa=cleanNumber(document.getElementById("wa").value);
- const file=document.getElementById("photo").files[0];
-
- if(!title||title.length>100){alert("❌ Account Title 1–100 character হতে হবে।");return;}
- if(!Number.isFinite(price)||price<=0||price>10000000){alert("❌ সঠিক Price দিন।");return;}
- if(details.length>1000){alert("❌ Details সর্বোচ্চ 1000 character।");return;}
- if(!wa){alert("❌ সঠিক WhatsApp number দিন।");return;}
- if(editId===null&&!file){alert("📷 একটি Photo Upload করুন।");return;}
- if(file&&!validateImage(file))return;
-
- const currentEditId=editId;
- const status=document.getElementById("uploadStatus");
- const btn=document.getElementById("publishBtn");
-
- try{
-  btn.disabled=true;
-
-  let imageUrl="";
-  if(file){
-   status.style.display="block";
-   status.textContent="⏳ Cloudinary-তে ছবি upload হচ্ছে...";
-   imageUrl=await uploadToCloudinary(file);
-   status.textContent="✅ ছবি upload হয়েছে!";
-  }else if(currentEditId){
-   const oldItem=items.find(item=>item.id===currentEditId);
-   imageUrl=oldItem?.pic||"";
-  }
-
-  const newItem={
-   id:currentEditId||(window.crypto&&crypto.randomUUID?crypto.randomUUID():String(Date.now())),
-   title,price,kind,
-   pic:imageUrl,
-   details:details||"No details added.",
-   wa
-  };
-
-  if(currentEditId){
-   const index=items.findIndex(item=>item.id===currentEditId);
-   if(index===-1){alert("❌ Listing পাওয়া যায়নি।");return;}
-   items[index]=newItem;
-  }else{
-   if(items.length>=50){alert("❌ সর্বোচ্চ 50টি listing রাখা যাবে।");return;}
-   items.unshift(newItem);
-  }
-
-  if(!saveItems())return;
-
-  closeSell();render();
-  alert(currentEditId?"✅ Listing update হয়েছে!":"✅ Listing publish হয়েছে!");
- }catch(error){
-  console.error(error);
-  status.style.display="block";
-  status.textContent="❌ "+error.message;
-  alert("❌ ছবি upload হয়নি। Cloudinary Upload Preset ঠিক আছে কিনা দেখুন।");
- }finally{
-  btn.disabled=false;
- }
-}
-
-function editItem(id){
- if(!requireAdmin())return;
- const item=items.find(x=>x.id===id);
- if(!item){alert("❌ Listing পাওয়া যায়নি।");return;}
-
- editId=id;
- document.getElementById("title").value=item.title||"";
- document.getElementById("price").value=item.price||"";
- document.getElementById("kind").value=item.kind||"Other";
- document.getElementById("details").value=item.details||"";
- document.getElementById("wa").value=item.wa||"";
-
- const preview=document.getElementById("preview");
- const img=safeImageUrl(item.pic);
- if(img){preview.src=img;preview.style.display="block";}else{preview.style.display="none";}
-
- document.getElementById("sellTitle").textContent="✏️ Edit Account";
- document.getElementById("publishBtn").textContent="💾 Save Changes";
- document.getElementById("sellModal").style.display="flex";
-}
-
-function deleteItem(id){
- if(!requireAdmin())return;
- if(!confirm("এই listing delete করতে চান?"))return;
- items=items.filter(item=>item.id!==id);
- if(saveItems()){render();alert("🗑️ Listing delete হয়েছে।");}
-}
-
-function goHome(){window.scrollTo({top:0,behavior:"smooth"});}
-function goBuy(){document.getElementById("buy").scrollIntoView({behavior:"smooth"});}
-
-document.getElementById("sellModal").addEventListener("click",function(e){if(e.target===this)closeSell();});
-document.getElementById("loginModal").addEventListener("click",function(e){if(e.target===this)closeLogin();});
-document.getElementById("adminPassword").addEventListener("keydown",function(e){if(e.key==="Enter")login();});
-
-updateAdminUI();
-render();
-</script>
-</body>
-    </html>
+{
+id:"starter-2",
+title:"High Level FF Account",
+price:9500,
+kind:"High Level",
+pic:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=c
