@@ -890,4 +890,1230 @@ id:"starter-2",
 title:"High Level FF Account",
 price:9500,
 kind:"High Level",
-pic:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=c
+pic:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80",
+details:"High level account with multiple items.",
+wa:"8801700000000"
+},
+
+{
+id:"starter-3",
+title:"Old Account — Rare Items",
+price:7000,
+kind:"Old Account",
+pic:"https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=900&q=80",
+details:"Old account with collectible items.",
+wa:"8801700000000"
+}
+
+];
+
+
+let items = loadItems();
+
+let editId = null;
+
+
+/* ================= ADMIN ================= */
+
+function isAdmin(){
+
+ return sessionStorage.getItem("ff_admin") === "1";
+
+}
+
+
+function updateAdminUI(){
+
+ document
+ .getElementById("adminBar")
+ .style.display = isAdmin() ? "block" : "none";
+
+ document
+ .getElementById("loginBtn")
+ .classList
+ .toggle("hidden",isAdmin());
+
+ document
+ .getElementById("logoutBtn")
+ .classList
+ .toggle("hidden",!isAdmin());
+
+}
+
+
+/* ================= LOAD ================= */
+
+function loadItems(){
+
+ try{
+
+  const raw =
+  localStorage.getItem("ffbazar_items");
+
+  if(!raw){
+   return starter.slice();
+  }
+
+  const parsed =
+  JSON.parse(raw);
+
+  if(Array.isArray(parsed)){
+   return parsed.slice(0,50);
+  }
+
+ }catch(e){
+
+  console.error(e);
+
+ }
+
+ return starter.slice();
+
+}
+
+
+/* ================= SAVE ================= */
+
+function saveItems(){
+
+ try{
+
+  localStorage.setItem(
+   "ffbazar_items",
+   JSON.stringify(items.slice(0,50))
+  );
+
+  return true;
+
+ }catch(e){
+
+  alert(
+   "❌ Storage পূর্ণ। Listing data ছোট করুন।"
+  );
+
+  return false;
+
+ }
+
+}
+
+
+/* ================= ESCAPE ================= */
+
+function esc(value){
+
+ return String(value ?? "")
+ .replace(/&/g,"&amp;")
+ .replace(/</g,"&lt;")
+ .replace(/>/g,"&gt;")
+ .replace(/"/g,"&quot;")
+ .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================= WHATSAPP ================= */
+
+function cleanNumber(value){
+
+ const n =
+ String(value || "")
+ .replace(/\D/g,"");
+
+ return n.length >= 10 &&
+        n.length <= 15
+        ? n
+        : null;
+
+}
+
+
+/* ================= IMAGE URL ================= */
+
+function safeImageUrl(value){
+
+ const s = String(value || "");
+
+ if(s.startsWith("data:image/")){
+  return s;
+ }
+
+ try{
+
+  const u =
+  new URL(s,location.href);
+
+  if(
+   u.protocol === "https:" ||
+   (
+    u.protocol === "http:" &&
+    location.protocol === "http:"
+   )
+  ){
+
+   return u.href;
+
+  }
+
+ }catch(e){}
+
+ return "";
+
+}
+
+
+/* ================= RENDER ================= */
+
+function render(){
+
+ const search =
+ document
+ .getElementById("search")
+ .value
+ .trim()
+ .toLowerCase();
+
+ const category =
+ document.getElementById("cat").value;
+
+ const sort =
+ document.getElementById("sort").value;
+
+
+ let list =
+ items.filter(item => {
+
+  const text =
+  `${item.title || ""} ${item.details || ""} ${item.kind || ""}`
+  .toLowerCase();
+
+  return text.includes(search) &&
+  (!category || item.kind === category);
+
+ });
+
+
+ if(sort === "low"){
+
+  list.sort(
+   (a,b) =>
+   Number(a.price || 0) -
+   Number(b.price || 0)
+  );
+
+ }
+
+
+ if(sort === "high"){
+
+  list.sort(
+   (a,b) =>
+   Number(b.price || 0) -
+   Number(a.price || 0)
+  );
+
+ }
+
+
+ document.getElementById("count").textContent =
+ items.length;
+
+
+ const grid =
+ document.getElementById("grid");
+
+
+ if(!list.length){
+
+  grid.innerHTML =
+  "<p>কোনো account পাওয়া যায়নি।</p>";
+
+  return;
+
+ }
+
+
+ grid.innerHTML =
+ list.map(item => {
+
+  const number =
+  cleanNumber(item.wa);
+
+  const img =
+  safeImageUrl(item.pic);
+
+  const whatsapp =
+  number
+  ? `https://wa.me/${number}`
+  : "#";
+
+
+  return `
+
+  <article class="card">
+
+   ${
+    img
+    ?
+    `<img
+      src="${esc(img)}"
+      alt="Account Photo"
+      onerror="this.style.display='none'"
+    >`
+
+    :
+
+    `<div class="no-photo">
+      No Photo
+    </div>`
+   }
+
+
+   <div class="body">
+
+    <div class="tag">
+     ${esc(item.kind)}
+    </div>
+
+    <h3>
+     ${esc(item.title)}
+    </h3>
+
+    <div class="price">
+     ৳ ${Number(item.price || 0)
+     .toLocaleString("bn-BD")}
+    </div>
+
+    <p>
+     ${esc(item.details)}
+    </p>
+
+
+    <div class="actions">
+
+     ${
+      number
+      ?
+      `<a
+       class="btn buy"
+       href="${esc(whatsapp)}"
+       target="_blank"
+       rel="noopener noreferrer">
+       🟢 WhatsApp
+      </a>`
+      :
+      ""
+     }
+
+
+     ${
+      isAdmin()
+      ?
+
+      `
+
+      <button
+       class="btn edit"
+       onclick="editItem('${esc(item.id)}')">
+       ✏️ Edit
+      </button>
+
+      <button
+       class="btn danger"
+       onclick="deleteItem('${esc(item.id)}')">
+       🗑️ Delete
+      </button>
+
+      `
+
+      :
+      ""
+     }
+
+    </div>
+
+   </div>
+
+  </article>
+
+  `;
+
+ }).join("");
+
+}
+
+
+/* ================= LOGIN ================= */
+
+function openLogin(){
+
+ document
+ .getElementById("loginModal")
+ .style.display = "flex";
+
+ setTimeout(() => {
+
+  document
+  .getElementById("adminPassword")
+  .focus();
+
+ },100);
+
+}
+
+
+function closeLogin(){
+
+ document
+ .getElementById("loginModal")
+ .style.display = "none";
+
+ document
+ .getElementById("adminPassword")
+ .value = "";
+
+}
+
+
+function login(){
+
+ const password =
+ document
+ .getElementById("adminPassword")
+ .value;
+
+
+ if(password !== ADMIN_PASSWORD){
+
+  alert("❌ ভুল Admin Password!");
+
+  return;
+
+ }
+
+
+ sessionStorage.setItem(
+  "ff_admin",
+  "1"
+ );
+
+
+ closeLogin();
+
+ updateAdminUI();
+
+ render();
+
+ alert(
+  "✅ Admin Login সফল হয়েছে!"
+ );
+
+}
+
+
+function logout(){
+
+ sessionStorage.removeItem(
+  "ff_admin"
+ );
+
+ editId = null;
+
+ updateAdminUI();
+
+ render();
+
+ alert(
+  "Admin Logout হয়েছে।"
+ );
+
+}
+
+
+/* ================= SELL ================= */
+
+/*
+   IMPORTANT:
+   এখানে requireAdmin() নেই।
+   তাই সবাই Sell Post করতে পারবে।
+*/
+
+function openSell(){
+
+ editId = null;
+
+ resetForm();
+
+ document
+ .getElementById("sellTitle")
+ .textContent = "📱 Add Account";
+
+ document
+ .getElementById("publishBtn")
+ .textContent = "🚀 Publish Listing";
+
+ document
+ .getElementById("sellModal")
+ .style.display = "flex";
+
+}
+
+
+function closeSell(){
+
+ document
+ .getElementById("sellModal")
+ .style.display = "none";
+
+ resetForm();
+
+}
+
+
+function resetForm(){
+
+ document.getElementById("title").value = "";
+
+ document.getElementById("price").value = "";
+
+ document.getElementById("details").value = "";
+
+ document.getElementById("wa").value = "";
+
+ document.getElementById("photo").value = "";
+
+ document
+ .getElementById("preview")
+ .removeAttribute("src");
+
+ document
+ .getElementById("preview")
+ .style.display = "none";
+
+ document
+ .getElementById("uploadStatus")
+ .style.display = "none";
+
+ document
+ .getElementById("uploadStatus")
+ .textContent = "";
+
+}
+
+
+/* ================= IMAGE VALIDATION ================= */
+
+function validateImage(file){
+
+ if(!file){
+  return false;
+ }
+
+ if(!ALLOWED_TYPES.includes(file.type)){
+
+  alert(
+   "❌ শুধু JPG, PNG অথবা WEBP image ব্যবহার করুন।"
+  );
+
+  return false;
+
+ }
+
+ if(file.size > MAX_IMAGE_SIZE){
+
+  alert(
+   "❌ Image সর্বোচ্চ 2MB হতে পারবে।"
+  );
+
+  return false;
+
+ }
+
+ return true;
+
+}
+
+
+/* ================= PREVIEW ================= */
+
+function showPreview(input){
+
+ const preview =
+ document.getElementById("preview");
+
+ const file =
+ input.files[0];
+
+
+ if(!file){
+
+  preview.style.display = "none";
+
+  preview.removeAttribute("src");
+
+  return;
+
+ }
+
+
+ if(!validateImage(file)){
+
+  input.value = "";
+
+  preview.style.display = "none";
+
+  preview.removeAttribute("src");
+
+  return;
+
+ }
+
+
+ const reader =
+ new FileReader();
+
+
+ reader.onload =
+ e => {
+
+  preview.src =
+  e.target.result;
+
+  preview.style.display =
+  "block";
+
+ };
+
+
+ reader.readAsDataURL(file);
+
+}
+
+
+/* ================= CLOUDINARY ================= */
+
+async function uploadToCloudinary(file){
+
+ const formData =
+ new FormData();
+
+ formData.append(
+  "file",
+  file
+ );
+
+ formData.append(
+  "upload_preset",
+  CLOUDINARY_UPLOAD_PRESET
+ );
+
+
+ const response =
+ await fetch(
+  CLOUDINARY_UPLOAD_URL,
+  {
+   method:"POST",
+   body:formData
+  }
+ );
+
+
+ if(!response.ok){
+
+  let message =
+  "Cloudinary upload failed";
+
+  try{
+
+   const err =
+   await response.json();
+
+   message =
+   err?.error?.message ||
+   message;
+
+  }catch(e){}
+
+  throw new Error(message);
+
+ }
+
+
+ const data =
+ await response.json();
+
+
+ if(!data.secure_url){
+
+  throw new Error(
+   "Image URL পাওয়া যায়নি।"
+  );
+
+ }
+
+
+ return data.secure_url;
+
+}
+
+
+/* ================= PUBLISH ================= */
+
+async function publish(){
+
+ /*
+    IMPORTANT:
+    এখানে কোনো Admin Password check নেই।
+    তাই সবাই নতুন Sell Post করতে পারবে।
+ */
+
+ const title =
+ document
+ .getElementById("title")
+ .value
+ .trim();
+
+ const price =
+ Number(
+  document
+  .getElementById("price")
+  .value
+ );
+
+ const kind =
+ document
+ .getElementById("kind")
+ .value;
+
+ const details =
+ document
+ .getElementById("details")
+ .value
+ .trim();
+
+ const wa =
+ cleanNumber(
+  document
+  .getElementById("wa")
+  .value
+ );
+
+ const file =
+ document
+ .getElementById("photo")
+ .files[0];
+
+
+ if(!title || title.length > 100){
+
+  alert(
+   "❌ Account Title 1–100 character হতে হবে।"
+  );
+
+  return;
+
+ }
+
+
+ if(
+  !Number.isFinite(price) ||
+  price <= 0 ||
+  price > 10000000
+ ){
+
+  alert(
+   "❌ সঠিক Price দিন।"
+  );
+
+  return;
+
+ }
+
+
+ if(details.length > 1000){
+
+  alert(
+   "❌ Details সর্বোচ্চ 1000 character।"
+  );
+
+  return;
+
+ }
+
+
+ if(!wa){
+
+  alert(
+   "❌ সঠিক WhatsApp number দিন।"
+  );
+
+  return;
+
+ }
+
+
+ if(editId === null && !file){
+
+  alert(
+   "📷 একটি Photo Upload করুন।"
+  );
+
+  return;
+
+ }
+
+
+ if(file && !validateImage(file)){
+
+  return;
+
+ }
+
+
+ const currentEditId =
+ editId;
+
+ const status =
+ document
+ .getElementById("uploadStatus");
+
+ const btn =
+ document
+ .getElementById("publishBtn");
+
+
+ try{
+
+  btn.disabled = true;
+
+
+  let imageUrl = "";
+
+
+  if(file){
+
+   status.style.display =
+   "block";
+
+   status.textContent =
+   "⏳ Cloudinary-তে ছবি upload হচ্ছে...";
+
+
+   imageUrl =
+   await uploadToCloudinary(file);
+
+
+   status.textContent =
+   "✅ ছবি upload হয়েছে!";
+
+  }
+
+
+  /*
+    Edit হলে শুধু Admin পারবে।
+  */
+
+  if(currentEditId){
+
+   if(!isAdmin()){
+
+    alert(
+     "🔒 Edit করার জন্য Admin Login করুন।"
+    );
+
+    return;
+
+   }
+
+
+   const oldItem =
+   items.find(
+    item =>
+    item.id === currentEditId
+   );
+
+
+   if(!oldItem){
+
+    alert(
+     "❌ Listing পাওয়া যায়নি।"
+    );
+
+    return;
+
+   }
+
+
+   if(!imageUrl){
+
+    imageUrl =
+    oldItem.pic || "";
+
+   }
+
+
+   items =
+   items.map(item => {
+
+    if(item.id === currentEditId){
+
+     return {
+
+      id:currentEditId,
+      title:title,
+      price:price,
+      kind:kind,
+      pic:imageUrl,
+      details:
+       details ||
+       "No details added.",
+      wa:wa
+
+     };
+
+    }
+
+    return item;
+
+   });
+
+
+  }
+
+  /*
+    নতুন Post:
+    Password লাগবে না।
+  */
+
+  else{
+
+   if(items.length >= 50){
+
+    alert(
+     "❌ সর্বোচ্চ 50টি listing রাখা যাবে।"
+    );
+
+    return;
+
+   }
+
+
+   const newItem = {
+
+    id:
+     window.crypto &&
+     crypto.randomUUID
+     ?
+     crypto.randomUUID()
+     :
+     String(Date.now()),
+
+    title:title,
+
+    price:price,
+
+    kind:kind,
+
+    pic:imageUrl,
+
+    details:
+     details ||
+     "No details added.",
+
+    wa:wa
+
+   };
+
+
+   items.unshift(
+    newItem
+   );
+
+  }
+
+
+  if(!saveItems()){
+
+   return;
+
+  }
+
+
+  closeSell();
+
+  render();
+
+
+  alert(
+   currentEditId
+   ?
+   "✅ Listing update হয়েছে!"
+   :
+   "✅ Sell Post সফলভাবে Publish হয়েছে!"
+  );
+
+
+ }catch(error){
+
+  console.error(error);
+
+  status.style.display =
+  "block";
+
+  status.textContent =
+  "❌ " + error.message;
+
+
+  alert(
+   "❌ ছবি upload হয়নি। Cloudinary Upload Preset ঠিক আছে কিনা দেখুন।"
+  );
+
+
+ }finally{
+
+  btn.disabled = false;
+
+ }
+
+}
+
+
+/* ================= EDIT ================= */
+
+function editItem(id){
+
+ if(!isAdmin()){
+
+  alert(
+   "🔒 Edit করার জন্য Admin Login করুন।"
+  );
+
+  openLogin();
+
+  return;
+
+ }
+
+
+ const item =
+ items.find(
+  x => x.id === id
+ );
+
+
+ if(!item){
+
+  alert(
+   "❌ Listing পাওয়া যায়নি।"
+  );
+
+  return;
+
+ }
+
+
+ editId = id;
+
+
+ document
+ .getElementById("title")
+ .value =
+ item.title || "";
+
+
+ document
+ .getElementById("price")
+ .value =
+ item.price || "";
+
+
+ document
+ .getElementById("kind")
+ .value =
+ item.kind || "Other";
+
+
+ document
+ .getElementById("details")
+ .value =
+ item.details || "";
+
+
+ document
+ .getElementById("wa")
+ .value =
+ item.wa || "";
+
+
+ const preview =
+ document.getElementById("preview");
+
+
+ const img =
+ safeImageUrl(item.pic);
+
+
+ if(img){
+
+  preview.src =
+  img;
+
+  preview.style.display =
+  "block";
+
+ }else{
+
+  preview.style.display =
+  "none";
+
+ }
+
+
+ document
+ .getElementById("sellTitle")
+ .textContent =
+ "✏️ Edit Account";
+
+
+ document
+ .getElementById("publishBtn")
+ .textContent =
+ "💾 Save Changes";
+
+
+ document
+ .getElementById("sellModal")
+ .style.display =
+ "flex";
+
+}
+
+
+/* ================= DELETE ================= */
+
+function deleteItem(id){
+
+ if(!isAdmin()){
+
+  alert(
+   "🔒 Delete করার জন্য Admin Login করুন।"
+  );
+
+  openLogin();
+
+  return;
+
+ }
+
+
+ if(!confirm(
+  "এই listing delete করতে চান?"
+ )){
+
+  return;
+
+ }
+
+
+ items =
+ items.filter(
+  item => item.id !== id
+ );
+
+
+ if(saveItems()){
+
+  render();
+
+  alert(
+   "🗑️ Listing delete হয়েছে।"
+  );
+
+ }
+
+}
+
+
+/* ================= NAVIGATION ================= */
+
+function goHome(){
+
+ window.scrollTo({
+  top:0,
+  behavior:"smooth"
+ });
+
+}
+
+
+function goBuy(){
+
+ document
+ .getElementById("buy")
+ .scrollIntoView({
+  behavior:"smooth"
+ });
+
+}
+
+
+/* ================= MODAL ================= */
+
+document
+.getElementById("sellModal")
+.addEventListener(
+ "click",
+ function(e){
+
+  if(e.target === this){
+
+   closeSell();
+
+  }
+
+ }
+);
+
+
+document
+.getElementById("loginModal")
+.addEventListener(
+ "click",
+ function(e){
+
+  if(e.target === this){
+
+   closeLogin();
+
+  }
+
+ }
+);
+
+
+document
+.getElementById("adminPassword")
+.addEventListener(
+ "keydown",
+ function(e){
+
+  if(e.key === "Enter"){
+
+   login();
+
+  }
+
+ }
+);
+
+
+/* ================= START ================= */
+
+updateAdminUI();
+
+render();
+
+</script>
+
+</body>
+</html>
