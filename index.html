@@ -1,145 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADMIN MEGH 71 X</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADMIN MEGH 71 X</title>
 
-    <style>
-        * { box-sizing: border-box; }
+<style>
+* { box-sizing: border-box; }
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: radial-gradient(circle at top, #301044, #09090d 55%);
-            color: white;
-            text-align: center;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #301044, #09090d 55%);
+    color: white;
+    text-align: center;
+}
 
-        .header {
-            padding: 35px 15px;
-            background: #15121c;
-            border-bottom: 2px solid #ff00d4;
-        }
+/* Animation */
+@keyframes glow {
+    0% { box-shadow: 0 0 10px #ff00d4; }
+    50% { box-shadow: 0 0 25px #ff00d4; }
+    100% { box-shadow: 0 0 10px #ff00d4; }
+}
 
-        h1 {
-            margin: 0;
-            font-size: 34px;
-            color: #ff00d4;
-            text-shadow: 0 0 20px #ff00d4;
-        }
+.header {
+    padding: 35px 15px;
+    background: #15121c;
+    border-bottom: 2px solid #ff00d4;
+}
 
-        .subtitle {
-            color: #ddd;
-            margin-top: 12px;
-        }
+h1 {
+    margin: 0;
+    font-size: 34px;
+    color: #ff00d4;
+    text-shadow: 0 0 20px #ff00d4;
+}
 
-        .profile {
-            width: 90%;
-            max-width: 420px;
-            margin: 35px auto;
-            padding: 25px;
-            background: #15121c;
-            border: 2px solid #ff00d4;
-            border-radius: 25px;
-            box-shadow: 0 0 25px #ff00d4;
-        }
+.subtitle {
+    color: #ddd;
+    margin-top: 12px;
+}
 
-        .profile img {
-            width: 100%;
-            max-width: 350px;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 20px;
-            border: 3px solid #ff00d4;
-            box-shadow: 0 0 25px #ff00d4;
-        }
+.profile {
+    width: 90%;
+    max-width: 420px;
+    margin: 35px auto;
+    padding: 25px;
+    background: #15121c;
+    border: 2px solid #ff00d4;
+    border-radius: 25px;
+    animation: glow 2s infinite;
+}
 
-        h2 {
-            color: #ff00d4;
-        }
+.profile img {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ff00d4;
+}
 
-        .description {
-            color: #ddd;
-            line-height: 1.6;
-        }
+h2 {
+    color: #ff00d4;
+}
 
-        .button {
-            display: block;
-            margin: 14px auto;
-            padding: 15px 20px;
-            width: 90%;
-            max-width: 300px;
-            background: linear-gradient(90deg, #ff00d4, #8f00ff);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            box-shadow: 0 0 18px #ff00d4;
-            transition: .3s;
-        }
+.description {
+    color: #ddd;
+    line-height: 1.6;
+}
 
-        .button:hover {
-            transform: scale(1.05);
-        }
+.button {
+    display: block;
+    margin: 14px auto;
+    padding: 15px;
+    width: 90%;
+    max-width: 300px;
+    background: linear-gradient(90deg, #ff00d4, #8f00ff);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: .3s;
+}
 
-        .online {
-            color: #00ff88;
-            font-weight: bold;
-        }
+.button:hover {
+    transform: scale(1.05);
+}
 
-        .footer {
-            margin-top: 45px;
-            padding: 25px;
-            color: #888;
-        }
-    </style>
+.online {
+    color: #00ff88;
+    font-weight: bold;
+}
+
+/* WhatsApp floating button */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.footer {
+    margin-top: 45px;
+    padding: 25px;
+    color: #888;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>ADMIN MEGH 71 X</h1>
-        <p class="subtitle">🎮 GAMING BUY & SELL 🎮</p>
-    </div>
+<div class="header">
+    <h1>ADMIN MEGH 71 X</h1>
+    <p class="subtitle">🎮 GAMING BUY & SELL 🎮</p>
+</div>
 
-    <div class="profile">
+<div class="profile">
+    <img src="Minhaj.jpg" alt="ADMIN">
 
-        <img src="./Minhaj.jpg" alt="ADMIN MEGH 71 X">
+    <h2>ADMIN MEGH 71 X</h2>
 
-        <h2>ADMIN MEGH 71 X</h2>
+    <p class="online">● ONLINE</p>
 
-        <p class="online">● ONLINE</p>
+    <p class="description">
+        Welcome to my official gaming website!<br>
+        Gaming Account Buy & Sell<br>
+        Trusted Service • Fast Response
+    </p>
 
-        <p class="description">
-            Welcome to my official gaming website!<br>
-            Gaming Account Buy & Sell<br>
-            Trusted Service • Fast Response
-        </p>
+    <a class="button" href="https://www.facebook.com/share/1CTuf3Tioz/" target="_blank">
+        🔵 FACEBOOK
+    </a>
 
-        <a class="button"
-           href="https://www.facebook.com/share/1CTuf3Tioz/"
-           target="_blank">
-            🔵 FACEBOOK
-        </a>
+    <a class="button" href="https://m.me/j/Aba2eiIkaNWFg4LC/" target="_blank">
+        💬 MESSENGER GROUP
+    </a>
 
-        <a class="button"
-           href="https://m.me/j/Aba2eiIkaNWFg4LC/?send_source=gc%3Acopy_invite_link_t"
-           target="_blank">
-            💬 MESSENGER GROUP
-        </a>
+    <a class="button" href="https://wa.me/97451601834" target="_blank">
+        🟢 WHATSAPP CHAT
+    </a>
+</div>
 
-        <a class="button"
-           href="#"
-           onclick="alert('WhatsApp: @adminmegh71x'); return false;">
-            🟢 WHATSAPP
-        </a>
+<!-- Floating WhatsApp -->
+<a class="whatsapp" href="https://wa.me/97451601834" target="_blank">
+    💬
+</a>
 
-    </div>
-
-    <div class="footer">
-        © 2026 ADMIN MEGH 71 X
-    </div>
+<div class="footer">
+    © 2026 ADMIN MEGH 71 X
+</div>
 
 </body>
 </html>
